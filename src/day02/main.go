@@ -23,18 +23,17 @@ var input = [16][16]int{
 func main() {
 	sum := 0
 	for _, a := range input {
-		min := 9999
-		max := 0
 		for _, b := range a {
-			if b < min {
-				min = b
-			}
-			if b > max {
-				max = b
+			for _, c := range a {
+				if c <= b {
+					continue
+				}
+				if c%b == 0 {
+					sum += c / b
+					break
+				}
 			}
 		}
-
-		sum += max - min
 	}
 
 	fmt.Printf("%d\n", sum)
