@@ -1,11 +1,17 @@
 package main
 
 import "fmt"
-import "math"
 
 const (
 	target = 361527
 )
+
+// Point is a point
+type Point struct {
+	x, y, val int
+}
+
+var mem = []Point{Point{x: 0, y: 0, val: 1}}
 
 func main() {
 	current := 1
@@ -29,9 +35,23 @@ func main() {
 			case 3:
 				y++
 			}
-			current++
-			if current == target {
-				fmt.Printf("%f\n", math.Abs(float64(x))+math.Abs(float64(y)))
+
+			sum := 0
+			sum += find(x-1, y-1)
+			sum += find(x-1, y+1)
+			sum += find(x+1, y-1)
+			sum += find(x+1, y+1)
+			sum += find(x, y-1)
+			sum += find(x, y+1)
+			sum += find(x-1, y)
+			sum += find(x+1, y)
+			current = sum
+
+			mem = append(mem, Point{x: x, y: y, val: current})
+
+			if current > target {
+				fmt.Printf("%d\n", current)
+				break
 			}
 			remaining--
 		}
@@ -48,4 +68,15 @@ func main() {
 		}
 		remaining = moves
 	}
+}
+
+func find(x int, y int) int {
+	for _, v := range mem {
+		if v.x == x {
+			if v.y == y {
+				return v.val
+			}
+		}
+	}
+	return 0
 }
