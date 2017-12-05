@@ -21,7 +21,13 @@ func main() {
 	moves := 0
 	for curr < len(jumps) {
 		next := curr + jumps[curr]
-		jumps[curr] = jumps[curr] + 1
+
+		if jumps[curr] >= 3 {
+			jumps[curr] = jumps[curr] - 1
+		} else {
+			jumps[curr] = jumps[curr] + 1
+		}
+
 		curr = next
 		moves++
 	}
