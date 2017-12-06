@@ -8,10 +8,10 @@ import (
 func main() {
 	bank := [16]int{2, 8, 8, 5, 4, 2, 3, 1, 5, 5, 1, 2, 15, 13, 5, 14}
 	mem := []string{"2885423155121513514"}
-	found := false
+	found := 0
 	moves := 0
 
-	for !found {
+	for found != 2 {
 		max := 0
 		pos := 0
 		for p, e := range bank {
@@ -38,9 +38,10 @@ func main() {
 			str += strconv.Itoa(a)
 		}
 
+		found = 0
 		for _, a := range mem {
 			if a == str {
-				found = true
+				found++
 			}
 		}
 
