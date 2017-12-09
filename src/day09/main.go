@@ -17,6 +17,7 @@ func main() {
 	}
 
 	total := 0
+	count := 0
 	for i := 0; i < len(input); i++ {
 		current := string(input[i])
 		command := ""
@@ -40,6 +41,8 @@ func main() {
 							i++
 						} else if current == ">" {
 							end = true
+						} else {
+							count++
 						}
 					}
 				} else if current == "}" {
@@ -60,5 +63,5 @@ func main() {
 		}
 	}
 
-	fmt.Println(total)
+	fmt.Println(count)
 }
