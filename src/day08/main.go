@@ -23,6 +23,7 @@ func main() {
 		commands = append(commands, scanner.Text())
 	}
 
+	max := 0
 	for _, cmd := range commands {
 		split := strings.Split(cmd, " ")
 
@@ -75,12 +76,9 @@ func main() {
 		} else {
 			fmt.Println(cnd)
 		}
-	}
 
-	max := 0
-	for _, reg := range registers {
-		if reg.Value > max {
-			max = reg.Value
+		if v.Value > max {
+			max = v.Value
 		}
 	}
 
