@@ -22,6 +22,7 @@ func main() {
 	x := 0
 	y := 0
 	z := 0
+	max := 0
 	for _, mov := range path {
 		if mov == "n" {
 			x++
@@ -42,9 +43,13 @@ func main() {
 			x++
 			y--
 		}
+		m := int(distance(0, 0, 0, x, y, z))
+		if m > max {
+			max = m
+		}
 	}
 
-	fmt.Println(distance(0, 0, 0, x, y, z))
+	fmt.Println(max)
 }
 
 func distance(x1, y1, z1, x2, y2, z2 int) float64 {
