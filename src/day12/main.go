@@ -33,15 +33,28 @@ func main() {
 		programs[id] = program{Links: links}
 	}
 
-	x := 0
-	for pos := range programs {
-		b := hasLink(pos, 0, []int{pos})
-		if b {
-			x++
+	visited := []int{}
+	groups := 0
+	i := 0
+	for i < len(programs) {
+		found := false
+		for pos := range programs {
+			if contains(visited, pos) {
+				continue
+			}
+			b := hasLink(pos, i, []int{pos})
+			if b {
+				visited = append(visited, pos)
+				found = true
+			}
 		}
+		if found {
+			groups++
+		}
+		i++
 	}
 
-	fmt.Println(x)
+	fmt.Println(groups)
 }
 
 func hasLink(id int, link int, visited []int) bool {
